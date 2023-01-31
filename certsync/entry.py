@@ -124,6 +124,7 @@ class CertSync:
 
         self.ca_ip = options.ca_ip
         self.user_search_filter = options.ldap_filter
+        self.scheme = options.scheme
         self.timeout = options.timeout
         self.jitter = options.jitter
         self.randomize = options.randomize
@@ -156,7 +157,7 @@ class CertSync:
                 self.template_key, self.template_cert = load_pfx(self.template_pfx)
 
     def init_ldap_conn(self):
-        self.ldap_connection = LDAPConnection(target=self.target)
+        self.ldap_connection = LDAPConnection(target=self.target, scheme=self.scheme)
         self.ldap_connection.connect()
 
     def run(self):
