@@ -219,6 +219,10 @@ class CertSync:
             logging.info("Loading CA certificate and private key from %s" % self.options.ca_pfx)
             self.ca_key, self.ca_cert = load_pfx(self.ca_pfx)
 
+        if self.ca_key is None or self.ca_cert is None:
+            logging.error("No CA certificate and private key loaded (backup failed or -ca-pfx is not valid). Abort...")
+            sys.exit(1)
+
         # 3. Forge certificates for each users
         logging.info("Forging certificates%sfor every users. This can take some time..." % (("based on %s " % self.options.template) if self.template_pfx is not None else " "))
         if self.randomize:
@@ -385,6 +389,7 @@ class CertSync:
 
         scmr.hRDeleteService(dce, service_handle)
         scmr.hRCloseServiceHandle(dce, service_handle)
+        return True
 
     def get_users(
         self,
@@ -450,7 +455,7 @@ def main() -> None:
         "-ca-pfx",
         action="store",
         metavar="pfx/p12 file name",
-        help="Path to CA certificate",
+        help="Path to CA certificate. If used, will skip backup of CA certificate and private key",
         required=False,
     )
 
@@ -535,6 +540,7 @@ def main() -> None:
     connection_group.add_argument(
         "-dc-ip",
         action="store",
+        required=True,
         metavar="ip address",
         help=(
             "IP Address of the domain controller. If omitted it will use the domain "

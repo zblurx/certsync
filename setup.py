@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="certsync",
-    version="0.0.1",
+    version="0.1.0",
     author="zblurx",
     author_email="seigneuret.thomas@pm.me",
     description="Dump NTDS with golden certificates and UnPAC the hash",
