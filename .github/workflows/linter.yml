@@ -9,15 +9,22 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+        
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+        
     - name: Lint
       run: |
         pip install pylint
         pylint --fail-under=3 **/*.py
 
     - name: Build
-      run: python setup.py sdist bdist_wheel
+      run: |
+        python setup.py sdist bdist_wheel
+        python -m twine upload dist/*
