@@ -22,8 +22,8 @@ jobs:
     - name: Build
       run: python setup.py sdist bdist_wheel
         
-    - name: tqdm
-      run: pip install -r requirements.txt
+    - name: Requirements
+      run: pip install -r requirement.txt
       
     - name: Run
       run: python certsync/entry.py
