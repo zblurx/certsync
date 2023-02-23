@@ -1,4 +1,4 @@
 tqdm
 ldap3
 impacket
-certipy.lib
+certipy
