@@ -1,1 +1,1 @@
-pip install tqdm
+tqdm
