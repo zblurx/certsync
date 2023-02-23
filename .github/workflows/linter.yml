@@ -1,20 +1,31 @@
-name: Super-Linter
+name: CI
 
-on: push
+on:
+  push:
+    branches:
+      - Asim-work
 
-jobs: 
-  super-lint:
+jobs:
+  build:
+
     runs-on: ubuntu-latest
-    
+
     steps:
-     - name: Checkout code
-       uses: actions/checkout@v2
-       
-     - name: Install flake8
-       run: pip install flake8
-       
-     - name: Run flake8
-       uses: suo/flake8-github-action@releases/v1
-       env: 
-          DEFAULT_BRANCH: Asim-work
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2.5.1
+      with:
+        node-version: '14.x'
+
+    - name: Install dependencies
+      run: |
+        npm install
+        npm install -g certsync
+
+    - name: Build
+      run: npm run build
+
+    - name: Test
+      run: npm run test
