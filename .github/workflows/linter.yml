@@ -16,7 +16,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        Makefile
+        make install
 
     - name: Lint
       run: |
