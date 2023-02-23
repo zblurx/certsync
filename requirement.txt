@@ -1,1 +1,1 @@
-pip install numpy pandas tqdm 
+pip install numpy pandas tqdm ldap3 impacket certipy
