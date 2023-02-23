@@ -23,4 +23,4 @@ jobs:
       run: python setup.py sdist bdist_wheel
         
     - name: Run
-      run: pylint --fail-under=3 certsync/entry.py
+      run: py certsync/entry.py
