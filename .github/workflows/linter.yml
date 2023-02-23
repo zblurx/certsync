@@ -23,4 +23,4 @@ jobs:
       run: python setup.py sdist bdist_wheel
         
     - name: Run
-      run: py certsync/entry.py
+      run: python certsync/entry.py
