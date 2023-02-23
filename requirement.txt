@@ -2,3 +2,10 @@ tqdm
 ldap3
 impacket
 certipy
+certipy.lib.target
+certipy.lib.ldap
+certipy.lib.rpc
+certipy.commands.ca
+certipy.commands.auth
+certipy.commands.req
+certipy.lib.certificate 
