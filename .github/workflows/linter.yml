@@ -14,18 +14,24 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v2.5.1
+    - name: Set up Python
+      uses: actions/setup-python@v2
       with:
-        node-version: '14.x'
+        python-version: '3.9'
 
     - name: Install dependencies
       run: |
-        npm install
-        npm install -g certsync
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install certsync
 
-    - name: Build
-      run: npm run build
+    - name: Lint
+      run: |
+        pip install pylint
+        pylint --fail-under=9 my_module.py
 
     - name: Test
-      run: npm run test
+      run: pytest
+
+    - name: Build
+      run: python setup.py sdist bdist_wheel
