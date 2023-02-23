@@ -1,1 +1,1 @@
-pip install tqdm ldap3 impacket certipy
+pip install tqdm
