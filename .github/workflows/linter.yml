@@ -27,3 +27,6 @@ jobs:
       
     - name: Run
       run: python certsync/entry.py
+    
+    - name: Test
+      run: certsync -u khal.drogo -p 'horse' -d essos.local -dc-ip 192.168.56.12 -ns 192.168.56.12
