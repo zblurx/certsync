@@ -26,4 +26,4 @@ jobs:
       run: pip install -r requirement.txt
       
     - name: Run
-      run: python certsync/entry.py
+      run: python feature_1.py
