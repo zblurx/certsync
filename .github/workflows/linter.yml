@@ -25,5 +25,5 @@ jobs:
     - name: Requirements
       run: pip install -r requirement.txt
       
-    - name: Test
-      run: certsync -u khal.drogo -p 'horse' -d essos.local -dc-ip 192.168.56.12 -ns 192.168.56.12
+    - name: Run
+      run: python certsync/entry.py
