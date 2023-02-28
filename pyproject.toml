@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "certsync"
+version = "0.1.0"
+description = "Dump NTDS with golden certificates and UnPAC the hash"
+readme = "README.md"
+homepage = "https://github.com/zblurx/certsync"
+repository = "https://github.com/zblurx/certsync"
+keywords = ["ntds", "certificate", "hashes"]
+authors = ["zblurx <seigneuret.thomas@protonmail.com>"]
+license = "MIT"
+classifiers = [
+    "Topic :: Security",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Environment :: Console"
+]
+packages = [
+    { include = "certsync"}
+]
+
+[tool.poetry.scripts]
+certsync = "certsync.entry:main"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+certipy-ad = "^4.3.0"
+tqdm = "^4.64.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
