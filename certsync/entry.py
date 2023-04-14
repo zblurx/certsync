@@ -209,7 +209,7 @@ class CertSync:
                 password = self.target.password,
                 dc_ip = self.target.dc_ip,
                 do_kerberos = self.target.do_kerberos,
-                hashes = self.target.hashes,
+                hashes = self.options.hashes,
                 aes = self.target.aes,
                 remote_name = self.ca_ip_address)
 
