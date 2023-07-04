@@ -120,7 +120,8 @@ class CertSync:
             no_pass = options.no_pass,
             ns = options.ns,
             aes = options.aesKey,
-            target_ip = options.dc_ip)
+            target_ip = options.dc_ip,
+            remote_name = options.kdcHost)
 
         self.ca_ip = options.ca_ip
         self.user_search_filter = options.ldap_filter
@@ -211,7 +212,8 @@ class CertSync:
                 do_kerberos = self.target.do_kerberos,
                 hashes = self.options.hashes,
                 aes = self.target.aes,
-                remote_name = self.ca_ip_address)
+                remote_name = self.ca_dns_name,
+                no_pass = self.options.no_pass)
 
             ca_module = CA(target=ca_target, ca=self.ca_name)
             self.backup_ca_pki(ca_module)
