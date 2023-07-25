@@ -1,6 +1,6 @@
 # certsync
 
-`certsync` is a new technique in order to dump NTDS remotely, but this time **without DRSUAPI**: it uses [golden certificate](https://cyberstoph.org/posts/2019/12/an-introduction-to-golden-certificates/) and [UnPAC the hash](https://www.thehacker.recipes/ad/movement/kerberos/unpac-the-hash).
+`certsync` is a new technique in order to dump NTDS remotely, but this time **without DRSUAPI**: it uses [golden certificate](https://www.thehacker.recipes/ad/persistence/ad-cs/golden-certificate) and [UnPAC the hash](https://www.thehacker.recipes/ad/movement/kerberos/unpac-the-hash).
 It works in several steps:
 
 1. Dump user list, CA informations and CRL from LDAP
