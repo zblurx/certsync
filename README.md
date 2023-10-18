@@ -60,11 +60,11 @@ pip install certsync
 
 ```text
 $ certsync -h
-usage: certsync [-h] [-debug] [-outputfile OUTPUTFILE] [-ca-pfx pfx/p12 file name] [-ca-ip ip address] [-d domain.local] [-u username] [-p password] [-hashes LMHASH:NTHASH]
-                [-no-pass] [-k] [-aesKey hex key] [-use-kcache] [-kdcHost KDCHOST] [-scheme ldap scheme] [-ns nameserver] [-dns-tcp] [-dc-ip ip address]
-                [-ldap-filter LDAP_FILTER] [-template cert.pfx] [-timeout timeout] [-jitter jitter] [-randomize]
+usage: certsync [-h] [-debug] [-outputfile OUTPUTFILE] [-ca-pfx pfx/p12 file name] [-ca-ip ip address] [-d domain.local] [-u username]
+                [-p password] [-hashes LMHASH:NTHASH] [-no-pass] [-k] [-aesKey hex key] [-kdcHost KDCHOST] [-scheme ldap scheme] [-ns nameserver]
+                [-dns-tcp] -dc-ip ip address [-ldap-filter LDAP_FILTER] [-template cert.pfx] [-timeout timeout] [-jitter jitter] [-randomize]
 
-Dump NTDS with golden certificates and PKINIT
+Dump NTDS with golden certificates and UnPAC the hash
 
 options:
   -h, --help            show this help message and exit
@@ -74,7 +74,7 @@ options:
 
 CA options:
   -ca-pfx pfx/p12 file name
-                        Path to CA certificate
+                        Path to CA certificate. If used, will skip backup of CA certificate and private key
   -ca-ip ip address     IP Address of the certificate authority. If omitted it will use the domainpart (FQDN) specified in LDAP
 
 authentication options:
@@ -87,10 +87,9 @@ authentication options:
   -hashes LMHASH:NTHASH
                         NTLM hashes, format is LMHASH:NTHASH
   -no-pass              don't ask for password (useful for -k)
-  -k                    Use Kerberos authentication. Grabs credentials from ccache file (KRB5CCNAME) based on target parameters. If valid credentials cannot be found, it
-                        will use the ones specified in the command line
+  -k                    Use Kerberos authentication. Grabs credentials from ccache file (KRB5CCNAME) based on target parameters. If valid
+                        credentials cannot be found, it will use the ones specified in the command line
   -aesKey hex key       AES key to use for Kerberos Authentication (128 or 256 bits)
-  -use-kcache           Use Kerberos authentication from ccache file (KRB5CCNAME)
   -kdcHost KDCHOST      FQDN of the domain controller. If omitted it will use the domain part (FQDN) specified in the target parameter
 
 connection options:

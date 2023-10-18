@@ -11,7 +11,7 @@ from tqdm import tqdm
 from ldap3.protocol.formatters.formatters import format_sid
 from impacket.dcerpc.v5 import rpcrt, scmr
 from impacket.examples import logger
-from certipy.lib.target import Target
+from certipy.lib.target import Target, get_kerberos_principal
 from certipy.lib.ldap import LDAPEntry, LDAPConnection
 from certipy.lib.rpc import get_dce_rpc
 from certipy.commands.ca import CA
@@ -156,6 +156,12 @@ class CertSync:
             with open(options.template, "rb") as f:
                 self.template_pfx = f.read()
                 self.template_key, self.template_cert = load_pfx(self.template_pfx)
+        if options.k:
+            principal = get_kerberos_principal()
+            if principal:
+                self.target.username, self.target.domain = principal
+                if self.target.remote_name is None:
+                    raise Exception("You need to specify -kdcHost option")
 
     def init_ldap_conn(self):
         self.ldap_connection = LDAPConnection(target=self.target, scheme=self.scheme)
@@ -519,7 +525,6 @@ def main() -> None:
         "line",
     )
     authentication_group.add_argument('-aesKey', action="store", metavar = "hex key", help='AES key to use for Kerberos Authentication (128 or 256 bits)')
-    authentication_group.add_argument("-use-kcache", action='store_true', help="Use Kerberos authentication from ccache file (KRB5CCNAME)")
     authentication_group.add_argument("-kdcHost", help="FQDN of the domain controller. If omitted it will use the domain part (FQDN) specified in the target parameter")
     
     connection_group = parser.add_argument_group("connection options")
