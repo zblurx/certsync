@@ -44,17 +44,29 @@ Contrary to what we may think, the attack is not at all slower.
 
 ## Installation
 
+Locally:
+
 ```text
 git clone https://github.com/zblurx/certsync
 cd certsync
 pip install .
 ```
 
-or 
+From Pypi:
 
 ```text
 pip install certsync
 ```
+
+From BlackArch:
+
+```text
+pacman -S certsync
+```
+
+All OS distribution packages:
+
+[![Packaging status](https://repology.org/badge/vertical-allrepos/certsync.svg)](https://repology.org/project/certsync/versions)
 
 ## Usage
 
