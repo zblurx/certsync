@@ -66,7 +66,7 @@ pacman -S certsync
 
 All OS distribution packages:
 
-[![Packaging status](https://repology.org/badge/vertical-allrepos/certsync.svg)](https://repology.org/project/certsync/versions)
+[![Packaging status](https://repology.org/badge/vertical-allrepos/certsync-ntds.svg)](https://repology.org/project/certsync-ntds/versions)
 
 ## Usage
 
