@@ -1,5 +1,6 @@
 import argparse
 import datetime
+import importlib.metadata
 import logging
 import random
 import sys
@@ -455,8 +456,8 @@ class CertSync:
 
 def main() -> None:
     logger.init()
-
-    parser = argparse.ArgumentParser(description="Dump NTDS with golden certificates and UnPAC the hash", add_help=True)
+    version = importlib.metadata.version("certsync")
+    parser = argparse.ArgumentParser(description=f"Dump NTDS with golden certificates and UnPAC the hash.\nVersion: {version}", add_help=True)
     parser.add_argument("-debug", action="store_true", help="Turn DEBUG output ON")
     parser.add_argument(
         "-outputfile",
