@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "certsync"
-version = "0.1.5"
+version = "0.1.6"
 description = "Dump NTDS with golden certificates and UnPAC the hash"
 readme = "README.md"
 homepage = "https://github.com/zblurx/certsync"
