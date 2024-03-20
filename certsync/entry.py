@@ -16,7 +16,6 @@ from certipy.lib.ldap import LDAPEntry, LDAPConnection
 from certipy.lib.rpc import get_dce_rpc
 from certipy.commands.ca import CA
 from certipy.commands.auth import Authenticate
-from certipy.commands.req import Request
 from certipy.lib.certificate import (
     PRINCIPAL_NAME,
     UTF8String,
@@ -52,7 +51,7 @@ class User:
         cert = cert.subject_name(subject)
         sans = []
         signature_hash_algorithm = ca_cert.signature_hash_algorithm.__class__
-        if type(alt_upn) == str:
+        if isinstance(alt_upn,str):
                 alt_upn = alt_upn.encode()
         alt_upn = encoder.encode(UTF8String(alt_upn))
         sans.append(x509.OtherName(PRINCIPAL_NAME, alt_upn))
@@ -377,7 +376,7 @@ class CertSync:
         logging.debug("Creating backup")
         try:
             scmr.hRStartServiceW(dce, service_handle)
-        except Exception as e:
+        except Exception:
             pass
 
         logging.debug("Retrieving backup")
@@ -401,7 +400,7 @@ class CertSync:
 
         try:
             scmr.hRStartServiceW(dce, service_handle)
-        except Exception as e:
+        except Exception:
             pass
 
         scmr.hRDeleteService(dce, service_handle)
